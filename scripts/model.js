@@ -37,7 +37,7 @@ function removeCommonWords() {
     temp = [];
     for (i = 0; i < words.length; i++) {
         for (j = 0; j < COMMONWORDS.length; j++) {
-            if (words[i] == COMMONWORDS[j]) {
+            if (words[i] === COMMONWORDS[j]) {
                 words[i] = null;
                 break;
             }
@@ -75,9 +75,25 @@ function removeDuplicates() {
             words.push([ key, temp[key]]);
         }
     }
-    console.log(words);
+    sortMode();
 }
 
+// Sort Words by Mode
+function sortMode() {
+    words.sort(function (a, b) {
+        // If the 1st words 2nd array item "mode count" is greater
+        // then move it left
+        if (a[1] > b[1]) {
+            return -1;
+        }
+        if (a[1] < b[1]) {
+            return 1;
+        }
+        return 0;
+    });
+    console.log("The most common word is " + words[0][0]);
+    console.log(words);
+}
 
 
 
